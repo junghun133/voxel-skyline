@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>voxel-skyline — 글을 도시로</title>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font:
+          14px/1.5 system-ui,
+          -apple-system,
+          sans-serif;
+        color: #16365c;
+        background: #eef4fb;
+      }
+      #app {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            ellipse 70% 60% at 50% 45%,
+            rgba(120, 190, 240, 0.5),
+            transparent 75%
+          ),
+          #f2f7fc;
+      }
+      .panel {
+        position: absolute;
+        left: 18px;
+        top: 18px;
+        width: 320px;
+        max-height: calc(100vh - 36px);
+        overflow: auto;
+        padding: 16px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(22, 54, 92, 0.1);
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+        z-index: 2;
+      }
+      .panel h1 {
+        margin: 0 0 2px;
+        font-size: 16px;
+      }
+      .panel p.sub {
+        margin: 0 0 12px;
+        color: #6b7a90;
+        font-size: 12px;
+      }
+      textarea {
+        width: 100%;
+        height: 190px;
+        resize: vertical;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #cfd8e3;
+        font:
+          12px/1.5 ui-monospace,
+          SFMono-Regular,
+          monospace;
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+      }
+      button {
+        padding: 7px 12px;
+        border-radius: 8px;
+        border: 1px solid #cfd8e3;
+        background: #fff;
+        font-size: 12px;
+        font-weight: 600;
+        color: #16365c;
+        cursor: pointer;
+      }
+      button.primary {
+        background: #0d99ff;
+        border-color: #0d99ff;
+        color: #fff;
+      }
+      .drop {
+        margin-top: 10px;
+        padding: 14px;
+        border: 1px dashed #9db4cd;
+        border-radius: 10px;
+        text-align: center;
+        color: #6b7a90;
+        font-size: 12px;
+      }
+      .drop.over {
+        border-color: #0d99ff;
+        background: rgba(13, 153, 255, 0.06);
+      }
+      .notes {
+        margin: 10px 0 0;
+        padding: 0 0 0 16px;
+        font-size: 11.5px;
+        color: #6b7a90;
+      }
+      .hud {
+        position: absolute;
+        right: 18px;
+        bottom: 18px;
+        display: flex;
+        gap: 6px;
+        z-index: 2;
+      }
+      .info {
+        position: absolute;
+        right: 18px;
+        top: 18px;
+        padding: 8px 12px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid rgba(22, 54, 92, 0.1);
+        font-size: 12px;
+        z-index: 2;
+        min-width: 190px;
+      }
+      .info b {
+        display: block;
+        font-size: 13px;
+      }
+      .info span {
+        color: #6b7a90;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="panel">
+        <h1>voxel-skyline</h1>
+        <p class="sub">
+          글을 붙여 넣거나 파일을 떨어뜨리면 도시가 됩니다. # 은 구역, ## 은
+          건물, 그 아래 줄이 항목입니다.
+        </p>
+        <textarea id="text" spellcheck="false"></textarea>
+        <div class="row">
+          <button class="primary" id="build">도시 세우기</button>
+          <button id="sample">예시 글</button>
+          <button id="night">밤</button>
+          <button id="home">처음 위치</button>
+        </div>
+        <div class="drop" id="drop">
+          .md · .txt · .csv · .json 파일을 여기에 끌어다 놓기
+        </div>
+        <ul class="notes" id="notes"></ul>
+      </div>
+      <div class="info" id="info">
+        <b>도시를 세워 보세요</b><span>건물을 누르면 항목이 보입니다</span>
+      </div>
+      <div class="hud">
+        <button id="zoomin">+</button>
+        <button id="zoomout">−</button>
+      </div>
+    </div>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

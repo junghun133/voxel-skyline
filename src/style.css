@@ -1,0 +1,94 @@
+/**
+ * voxel-skyline 기본 스타일. 라벨·리더선은 캔버스 위 DOM 이라 CSS 로 꾸민다.
+ * 색이나 글꼴을 바꾸려면 이 파일을 복사해 쓰거나 아래 클래스를 덮어쓴다.
+ */
+
+.vs-overlay,
+.vs-leaders {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.vs-leaders {
+  overflow: visible;
+}
+.vs-leaders line {
+  stroke: rgba(30, 41, 59, 0.35);
+  stroke-width: 1;
+  opacity: 0;
+  transition: opacity 0.18s;
+}
+.vs-leaders line.on {
+  opacity: 1;
+}
+
+.vs-building,
+.vs-district {
+  position: absolute;
+  opacity: 0;
+  transform: translate(0, -50%);
+  transition: opacity 0.18s;
+  white-space: nowrap;
+  font:
+    500 12px/1.3 system-ui,
+    -apple-system,
+    sans-serif;
+  color: #16365c;
+}
+.vs-building.on,
+.vs-district.on {
+  opacity: 1;
+}
+
+.vs-building {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(22, 54, 92, 0.1);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+.vs-building b {
+  font-weight: 600;
+}
+.vs-building span {
+  font-size: 11px;
+  color: #7c8798;
+  font-variant-numeric: tabular-nums;
+}
+.vs-building.hi {
+  border-color: var(--accent, #0d99ff);
+  box-shadow: 0 3px 12px rgba(13, 153, 255, 0.24);
+}
+
+.vs-district {
+  transform: translate(-50%, -50%);
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--accent, #94a3b8);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.vs-gap {
+  position: absolute;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.18s;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px dashed rgba(22, 54, 92, 0.35);
+  background: rgba(255, 255, 255, 0.7);
+  font:
+    500 11px/1.3 system-ui,
+    sans-serif;
+  color: #7c8798;
+  white-space: nowrap;
+}
+.vs-gap.on {
+  opacity: 1;
+}

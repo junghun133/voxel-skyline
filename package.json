@@ -1,0 +1,60 @@
+{
+  "name": "voxel-skyline",
+  "version": "0.1.0",
+  "description": "Turn text, notes or CSV into a browsable isometric voxel city. Districts are groups, buildings are topics, height is volume, window light is activity. Built on three.js.",
+  "keywords": [
+    "three",
+    "threejs",
+    "webgl",
+    "isometric",
+    "voxel",
+    "city",
+    "data-visualization",
+    "knowledge-base",
+    "graph"
+  ],
+  "license": "MIT",
+  "author": "Junghun Park",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist",
+    "src",
+    "examples",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./dist/voxel-skyline.js",
+  "module": "./dist/voxel-skyline.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/voxel-skyline.js"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build -c vite.lib.config.ts && tsc -p tsconfig.build.json && node scripts/copy-css.mjs",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write \"{src,examples}/**/*.{ts,css,html}\"",
+    "format:check": "prettier --check \"{src,examples}/**/*.{ts,css,html}\""
+  },
+  "peerDependencies": {
+    "three": ">=0.160.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.185.0",
+    "prettier": "^3.3.3",
+    "three": "^0.185.0",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.0",
+    "vite-plugin-dts": "^4.2.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

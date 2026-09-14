@@ -85,7 +85,7 @@ let night = false;
 document.getElementById('night')?.addEventListener('click', (e) => {
   night = !night;
   city.setNight(night);
-  (e.currentTarget as HTMLButtonElement).textContent = night ? '낮' : '밤';
+  (e.currentTarget as HTMLButtonElement).textContent = night ? 'Day' : 'Night';
 });
 document.getElementById('home')?.addEventListener('click', () => city.home());
 document

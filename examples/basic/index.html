@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>voxel-skyline — 글을 도시로</title>
+    <title>voxel-skyline — notes into a city</title>
     <style>
       :root {
         color-scheme: light;
@@ -142,23 +142,21 @@
       <div class="panel">
         <h1>voxel-skyline</h1>
         <p class="sub">
-          글을 붙여 넣거나 파일을 떨어뜨리면 도시가 됩니다. # 은 구역, ## 은
-          건물, 그 아래 줄이 항목입니다.
+          Paste text or drop a file. <code>#</code> is a district,
+          <code>##</code> is a building, the lines under them are items.
         </p>
         <textarea id="text" spellcheck="false"></textarea>
         <div class="row">
-          <button class="primary" id="build">도시 세우기</button>
-          <button id="sample">예시 글</button>
-          <button id="night">밤</button>
-          <button id="home">처음 위치</button>
+          <button class="primary" id="build">Build city</button>
+          <button id="sample">Sample</button>
+          <button id="night">Night</button>
+          <button id="home">Home</button>
         </div>
-        <div class="drop" id="drop">
-          .md · .txt · .csv · .json 파일을 여기에 끌어다 놓기
-        </div>
+        <div class="drop" id="drop">drop .md · .txt · .csv · .json here</div>
         <ul class="notes" id="notes"></ul>
       </div>
       <div class="info" id="info">
-        <b>도시를 세워 보세요</b><span>건물을 누르면 항목이 보입니다</span>
+        <b>Build a city</b><span>click a building to see its items</span>
       </div>
       <div class="hud">
         <button id="zoomin">+</button>

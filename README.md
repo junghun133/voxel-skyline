@@ -1,71 +1,83 @@
-# voxel-skyline
+<p align="center">한국어 | <a href="README.en.md">English</a></p>
 
-**Paste your notes. Get a city you can walk around.**
+<p align="center">
+  <img src="assets/banner.svg" alt="voxel-skyline" width="840">
+</p>
 
-Headings become districts, sub-headings become buildings, and the lines under them become items.
-A building is as tall as it has items, its windows light up with activity, and anything you have
-not written yet stays an empty plot. The shape of what you know, and the holes in it, become
-something you can look at.
+<p align="center">
+  <img src="https://img.shields.io/badge/license-MIT-1B2B42?style=for-the-badge&labelColor=07101C" alt="MIT License">
+  <img src="https://img.shields.io/badge/TypeScript-5.5-1B2B42?style=for-the-badge&logo=typescript&logoColor=5CC8FF&labelColor=07101C" alt="TypeScript">
+  <img src="https://img.shields.io/badge/three.js-%E2%89%A50.160-1B2B42?style=for-the-badge&logo=threedotjs&logoColor=5CC8FF&labelColor=07101C" alt="three.js">
+  <img src="https://img.shields.io/badge/Vite-5-1B2B42?style=for-the-badge&logo=vite&logoColor=5CC8FF&labelColor=07101C" alt="Vite">
+  <img src="https://img.shields.io/badge/node-%E2%89%A518-1B2B42?style=for-the-badge&logo=nodedotjs&logoColor=5CC8FF&labelColor=07101C" alt="Node.js">
+</p>
 
-![A city built from notes](docs/screenshot.png)
+**글을 붙여 넣으면 도시가 됩니다.** `#` 제목은 구역, `##` 제목은 건물, 그 아래 줄은 항목이 됩니다. 건물은 항목이 많을수록 높아지고, 창은 활성도만큼 불이 켜지며, 아직 쓰지 않은 자리는 빈 필지로 남습니다. 아는 것의 모양과 비어 있는 곳이 눈에 보입니다. three.js 기반이며 모든 처리는 브라우저 안에서 끝납니다.
 
-Built on [three.js](https://threejs.org). Orthographic camera, instanced trees and cars, four
-window-light levels baked into canvas textures. Nothing leaves the browser. MIT licensed.
+![글로 만든 도시](docs/screenshot.png)
 
----
+## 주요 기능
 
-## Try it in five minutes
+- **텍스트 → 도시**: Markdown, 평문, CSV, TSV, JSON 을 구역 > 건물 > 항목 3계층으로 읽습니다. 어떤 규칙으로 읽었는지는 결과의 `notes` 로 알려 줍니다.
+- **시각 인코딩**: 높이는 항목 수, 창 불빛은 활성도(0~1), 색은 구역, 건물 사이 도로는 직접 지정한 `links`, 빈 필지는 `gaps` 로 적어 둔 공백입니다.
+- **항목 수 → 층수**: 10건까지는 1건 = 1층, 이후 완만하게 늘다가 26층에서 멈춥니다. 건물 하나가 도시 전체를 가리지 않습니다.
+- **조작**: 끌어서 이동, Shift·우클릭 끌기로 회전, 휠·핀치로 확대, 건물 클릭 시 각도를 유지한 채 확대, 가만히 두면 천천히 회전.
+- **낮/밤**, 팔레트 교체, 활성도 기준 이하 건물 소등, 건물 강조.
+- **건물 양식 5종**: `lab`, `lobby`, `control`, `server`, `campus`.
+- **연출**: 건물이 올라오는 동안 공사 장비, 도로 위 차량, 떠다니는 입자, 외곽 블록. 옵션으로 끌 수 있습니다.
+- **렌더링 전용**: 정사영 카메라, 인스턴스 메시(차량·입자 등), 창 조명은 캔버스 텍스처 4단계를 모든 건물이 공유합니다. 상태 관리, 서버, 프레임워크 바인딩은 없습니다.
+
+![밤 모드](docs/screenshot-night.png)
+
+## 빠른 시작
+
+요구 사항: Node.js 18 이상.
 
 ```bash
 git clone https://github.com/junghun133/voxel-skyline
 cd voxel-skyline
 npm install
-npm run dev          # http://localhost:5173
+npm run dev          # http://localhost:5173 (examples/basic 데모)
 ```
 
-Then go in this order. Each step takes a few seconds and shows one idea.
+| 스크립트 | 설명 |
+| --- | --- |
+| `npm run dev` | `examples/basic` 데모를 Vite 개발 서버(포트 5173)로 실행 |
+| `npm run build` | 라이브러리를 `dist` 로 빌드 (ES 모듈, 타입 선언, `style.css` 포함) |
+| `npm run typecheck` | `tsc --noEmit` 타입 검사 |
+| `npm run format` / `format:check` | Prettier 적용 / 검사 |
 
-**1. Watch a city get built.** The page opens with a sample already loaded. Cranes and trucks sit
-on the plots for about three seconds while the buildings rise out of the ground, then the
-equipment disappears. That is the whole data set arriving.
+### 데모 사용 순서
 
-**2. Read the skyline before you read anything else.** Two tall buildings in one district and a
-single low one in another tells you where the material is. District names float over each block
-while you are zoomed out.
+1. 열면 예시 글이 이미 올라가 있습니다. 건물이 올라오는 동안 크레인과 트럭이 보이고, 끝나면 사라집니다.
+2. 왼쪽 칸의 글을 `#`, `##` 이 있는 아무 글로 바꾸고 **Build city** 를 누르면 도시가 다시 섭니다. **Sample** 은 예시 글로 되돌립니다.
+3. 건물을 클릭하면 확대되고 오른쪽에 항목이 나옵니다.
+4. **Night** 로 밤 모드, **Home** 으로 처음 시점으로 돌아갑니다.
+5. `.md`, `.txt`, `.csv`, `.json` 파일을 드롭 영역에 떨어뜨리면 읽습니다. 어떤 규칙을 썼는지는 드롭 영역 아래에 나옵니다.
 
-**3. Put your own notes in.** Replace the text in the left panel with anything that has `#` and
-`##` headings and press **Build city**. The city is rebuilt from your text. Try a
-meeting note, a retro, a glossary, a reading list.
+## 입력 형식
 
-**4. Click a building.** The camera zooms in without spinning the city, a ring marks the
-building, and the panel on the right lists the items inside it. This is the "open the folder"
-moment.
+`ingestText(text, name?)`, `ingestTexts([{ name, text }])`, `ingestFiles(fileList)` 는 `CityData` 와 `notes` 배열을 돌려줍니다.
 
-**5. Turn on night.** Windows light up in proportion to activity. If your data has no activity
-values every building glows evenly, which is the point of the next step.
+| 입력 | 읽는 방식 |
+| --- | --- |
+| Markdown, 평문 | `#` 는 구역, `##` 이하는 건물, 목록 항목과 문단은 항목 |
+| 제목 없는 텍스트 | 파일 이름이 구역, 빈 줄로 나뉜 덩어리가 건물 |
+| CSV, TSV | 헤더에서 district / building / item / activity 열을 찾고, 헤더가 없으면 1·2·3열 |
+| JSON | `districts` 와 `buildings` 배열이 있으면 `CityData` 로 그대로 사용, 행 배열이면 표처럼 읽음 |
 
-**6. Drop a CSV with an activity column.** Drag any `.csv`, `.md`, `.txt` or `.json` file onto
-the drop zone. With `district,building,item,activity` headers, buildings with low activity go
-dark. Old, untouched material stops shining. The note under the drop zone tells you which rule
-was used to read your file.
+- CSV 헤더는 `district`, `group`, `구역`, `분야`, `category` / `building`, `topic`, `건물`, `주제` / `item`, `title`, `항목`, `제목`, `name` / `activity`, `weight`, `활성` 이 들어간 이름을 인식합니다.
+- `ingestFiles` 는 브라우저 File API 로 읽고 8MB 를 넘는 파일은 건너뜁니다. 서버로 올리지 않습니다.
 
-**7. Move around.** Drag to pan, shift-drag or right-drag to rotate, wheel or pinch to zoom,
-**Home** to come back. Leave it alone for a few seconds and the city drifts slowly on
-its own.
-
-What to look for while you do this: height is volume, light is recency, colour is which district,
-roads between buildings are links you declared, and an empty plot is a gap you named but never
-filled.
-
----
-
-## Use it in your app
-
-```bash
-npm install voxel-skyline three
+```csv
+district,building,item,activity
+Product,Mobile approval,Went responsive instead of a native app,0.9
+Product,Large upload,Split files into 5MB chunks,0.2
 ```
 
-`three` is a peer dependency (`>=0.160`), so the library uses whatever version you already have.
+## 라이브러리 API
+
+> 아직 npm 에 배포되지 않았습니다. 사용하려면 저장소를 클론해 `npm run build` 로 `dist` 를 만드세요. `three` 는 peer dependency(`>=0.160`)입니다.
 
 ```ts
 import { createCityRenderer, ingestText } from 'voxel-skyline';
@@ -82,8 +94,6 @@ city.setData(
 ## Mobile approval
 - Went responsive instead of a native app
 - App review blocks same-day fixes
-## Large upload
-- Split files into 5MB chunks
 
 # Operations
 ## Release window
@@ -96,114 +106,79 @@ city.on('select', (building) => {
 });
 ```
 
-## Reading text and files
-
-`ingestText(text, name?)`, `ingestTexts([{ name, text }])` and `ingestFiles(fileList)` return
-`CityData` plus a `notes` array explaining which rule was used, so you can show that to the user.
-
-| Input                 | How it is read                                                                        |
-| --------------------- | ------------------------------------------------------------------------------------- |
-| Markdown, plain text  | `#` is a district, `##` and deeper is a building, list items and paragraphs are items |
-| Text with no headings | the file name becomes the district, blank-line separated blocks become buildings      |
-| CSV, TSV              | header columns named district / building / item / activity, otherwise columns 1·2·3   |
-| JSON                  | already-shaped `CityData` is used as is; an array of rows is read like a table        |
-
-Files are read in the browser with the File API. Nothing is uploaded.
-
-## Feeding structured data directly
+### 구조화된 데이터 직접 입력
 
 ```ts
 city.setData({
   districts: [{ id: 'ops', label: 'Operations', gaps: ['Runbooks'] }],
-  buildings: [
-    { id: 'release', name: 'Release window', districtId: 'ops', count: 12 },
-  ],
-  items: [
-    { id: '1', title: 'Tuesday only', buildingId: 'release', activity: 0.9 },
-  ],
+  buildings: [{ id: 'release', name: 'Release window', districtId: 'ops', count: 12 }],
+  items: [{ id: '1', title: 'Tuesday only', buildingId: 'release', activity: 0.9 }],
   links: [{ a: 'release', b: 'oncall' }],
 });
 ```
 
-- `count` sets the height. Ten items is ten floors, then growth slows and stops at 26 floors, so
-  one huge building cannot flatten the rest of the city.
-- `activity` (0–1) sets the window light and fades the district colour when it is low.
-- `gaps` draws an empty plot with a label, for "we know this is missing".
-- `links` between buildings in different districts are drawn as roads, thicker with `weight`.
+- `count`: 높이를 정합니다. 없으면 `items` 개수를 셉니다.
+- `activity` (0~1): 창 불빛 밝기. 건물에 없으면 항목들의 평균입니다.
+- `gaps`: 이름이 붙은 빈 필지.
+- `links`: 건물 사이 도로. `weight` 로 굵기를 줍니다.
+- 구역은 `hue`, `blockIndex`(3×2 격자의 0~5칸), `style`, `description` 을 줄 수 있습니다.
 
-## API
+### `createCityRenderer(container, options)` 가 돌려주는 객체
 
-`createCityRenderer(container, options)` returns:
+| 메서드 | 설명 |
+| --- | --- |
+| `setData(data)` | 도시를 다시 세움 |
+| `getLayout()` | 좌표·크기까지 계산된 현재 배치 |
+| `focusBuilding(id, zoom?)` | 보던 각도를 유지한 채 건물로 확대 |
+| `focusDistrict(id)` | 구역 하나가 보이게 이동 |
+| `home()` | 처음 시점으로 |
+| `zoomBy(factor)` / `setZoom(z)` | 확대·축소 |
+| `setNight(on)` | 밤 팔레트 |
+| `setHighlight(ids \| null)` | 일부 건물만 강조, 나머지는 옅게 |
+| `setActivityThreshold(t)` | 활성도가 `t` 보다 낮은 건물 소등 |
+| `setPalette(input)` | 색 다시 계산 (테마 전환) |
+| `setAutoRotate(on)` | 자동 회전 |
+| `resize()` / `start()` / `stop()` / `dispose()` | 수명 주기 |
+| `on('hover' \| 'select' \| 'view', fn)` | 이벤트. 구독 해제 함수를 반환 |
+| `canvas` | three.js 가 만든 캔버스 (읽기 전용) |
 
-| Method                                          | What it does                                    |
-| ----------------------------------------------- | ----------------------------------------------- |
-| `setData(data)`                                 | rebuild the city                                |
-| `focusBuilding(id, zoom?)`                      | zoom to one building, keeping the current angle |
-| `focusDistrict(id)`                             | frame one district                              |
-| `home()`                                        | back to the opening view                        |
-| `zoomBy(factor)` / `setZoom(z)`                 | zoom                                            |
-| `setNight(on)`                                  | night palette, windows light up                 |
-| `setHighlight(ids \| null)`                     | keep some buildings bright, fade the rest       |
-| `setActivityThreshold(t)`                       | anything below `t` goes dark                    |
-| `setPalette(input)`                             | recolour, e.g. when the page theme changes      |
-| `setAutoRotate(on)`                             | slow drift when nobody is interacting           |
-| `resize()` / `start()` / `stop()` / `dispose()` | lifecycle                                       |
-| `on('hover' \| 'select' \| 'view', fn)`         | events, returns an unsubscribe function         |
+옵션: `palette`, `night`, `outskirts`, `traffic`, `ambient`, `construction`, `riseSeconds`(기본 2.6), `autoRotate`, `labels`, `formatCount`, `insets`.
 
-Options: `palette`, `night`, `outskirts`, `traffic`, `ambient`, `construction`, `riseSeconds`,
-`autoRotate`, `labels`, `formatCount`, `insets`.
+### 스타일
 
-## Styling
+`voxel-skyline/style.css` 는 캔버스 위에 뜨는 라벨(`.vs-building`, `.vs-district`, `.vs-gap`, `.vs-leaders line`)을 꾸밉니다. 색은 팔레트에서 오며, `readPalette(el, '--vs-')` 로 CSS 변수에서 읽을 수도 있습니다.
 
-`voxel-skyline/style.css` styles the labels that float over the canvas (`.vs-building`,
-`.vs-district`, `.vs-gap`, `.vs-leaders line`). Copy it or override the classes. Colours come
-from the palette rather than CSS, and `readPalette(el, '--vs-')` reads them from CSS variables if
-you would rather drive them from your theme.
+## 기술 스택
 
-## Notes
+| 영역 | 사용 |
+| --- | --- |
+| 렌더링 | three.js (정사영 카메라, 인스턴스 메시, 캔버스 텍스처) |
+| 언어 | TypeScript 5 |
+| 빌드 | Vite 5 (라이브러리 모드, ES 모듈), vite-plugin-dts |
+| 포맷 | Prettier |
 
-- The camera is orthographic, so the city keeps its isometric look at any zoom, and selecting a
-  building only pans and zooms. It never spins the city around you.
-- Trees, cars and dust are instanced meshes, and window light is four canvas textures shared by
-  every building, so a few hundred buildings stay cheap.
-- Rendering only. No store, no server, no framework binding.
+## 프로젝트 구조
 
-![The same city at night](docs/screenshot-night.png)
-
----
-
-## 한국어
-
-**글을 붙여 넣으면 도시가 됩니다.** `#` 은 구역, `##` 은 건물, 그 아래 줄은 항목입니다. 항목이
-많을수록 건물이 높고, 활성도만큼 창에 불이 들어오며, 아직 쓰지 않은 자리는 빈 필지로 남습니다.
-아는 것의 모양과 비어 있는 곳이 눈에 보이게 됩니다.
-
-### 체험 순서
-
-```bash
-git clone https://github.com/junghun133/voxel-skyline
-cd voxel-skyline && npm install && npm run dev
+```text
+src/
+  index.ts        공개 API
+  renderer.ts     createCityRenderer, 조작·라벨·이벤트
+  ingest.ts       텍스트·파일 → CityData
+  layout.ts       구역 격자 배치, 층수·형태 계산
+  buildings.ts    건물 양식, 창 조명 텍스처
+  scene.ts  camera.ts  palette.ts  constants.ts  types.ts
+  construction.ts  traffic.ts  ambient.ts  outskirts.ts
+  style.css       라벨 스타일
+examples/basic/   Vite 데모 (npm run dev)
+docs/             스크린샷
+assets/           README 배너
+scripts/          빌드 보조 (CSS 복사)
 ```
 
-1. **도시가 세워지는 것을 봅니다.** 예시 글이 이미 올라가 있어, 열면 크레인과 트럭이 있는
-   공사장에서 건물이 3초쯤 올라온 뒤 장비가 사라집니다.
-2. **글을 읽기 전에 스카이라인을 먼저 읽습니다.** 한쪽에 높은 건물 둘, 다른 쪽에 낮은 건물
-   하나. 어디에 재료가 쌓였는지 한눈에 보입니다.
-3. **내 글을 넣습니다.** 왼쪽 칸의 글을 지우고 `#`·`##` 이 있는 아무 글이나 붙여 넣은 뒤
-   「도시 세우기」를 누르면 그 글로 도시가 다시 섭니다.
-4. **건물을 누릅니다.** 도시가 회전하지 않고 그 자리에서 확대되며, 오른쪽에 그 건물의 항목이
-   나옵니다.
-5. **밤을 켭니다.** 활성도만큼 창에 불이 들어옵니다.
-6. **CSV 를 떨어뜨립니다.** `district,building,item,activity` 헤더가 있으면 활성도가 낮은
-   건물은 어두워집니다. 어떤 규칙으로 읽었는지는 드롭 영역 아래에 문장으로 나옵니다.
-7. **돌아다닙니다.** 끌면 이동, 시프트·우클릭 끌기는 회전, 휠은 확대, 「처음 위치」로 복귀.
-   가만히 두면 천천히 돕니다.
+## 기여
 
-읽는 법은 넷입니다. 높이는 양, 불빛은 최근 정도, 색은 구역, 건물 사이 도로는 직접 지정한
-연결입니다. 빈 필지는 이름만 적어 둔 공백입니다.
+이슈와 PR 을 환영합니다. 자세한 규칙은 [CONTRIBUTING.md](CONTRIBUTING.md) 를 보세요. 변경 이력은 [CHANGELOG.md](CHANGELOG.md) 에 있습니다. 코드 주석은 한국어를 기준으로 합니다.
 
-코드 주석은 한국어, 공개 문서는 영어를 기준으로 합니다.
+## 라이선스
 
-## License
-
-MIT © 2026 Junghun Park
+[MIT](LICENSE) © 2026 Junghun Park

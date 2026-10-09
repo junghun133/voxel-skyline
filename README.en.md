@@ -1,16 +1,6 @@
 <p align="center"><a href="README.md">한국어</a> | English</p>
 
-<p align="center">
-  <img src="assets/banner.svg" alt="voxel-skyline" width="840">
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/license-MIT-1B2B42?style=for-the-badge&labelColor=07101C" alt="MIT License">
-  <img src="https://img.shields.io/badge/TypeScript-5.5-1B2B42?style=for-the-badge&logo=typescript&logoColor=5CC8FF&labelColor=07101C" alt="TypeScript">
-  <img src="https://img.shields.io/badge/three.js-%E2%89%A50.160-1B2B42?style=for-the-badge&logo=threedotjs&logoColor=5CC8FF&labelColor=07101C" alt="three.js">
-  <img src="https://img.shields.io/badge/Vite-5-1B2B42?style=for-the-badge&logo=vite&logoColor=5CC8FF&labelColor=07101C" alt="Vite">
-  <img src="https://img.shields.io/badge/node-%E2%89%A518-1B2B42?style=for-the-badge&logo=nodedotjs&logoColor=5CC8FF&labelColor=07101C" alt="Node.js">
-</p>
+# voxel-skyline
 
 **Paste your notes. Get a city you can walk around.** `#` headings become districts, `##` headings become buildings, and the lines under them become items. A building is as tall as it has items, its windows light up with activity, and anything you have not written yet stays an empty plot. The shape of what you know, and the holes in it, become something you can look at. Built on three.js. Everything runs in the browser.
 
@@ -71,8 +61,8 @@ npm run dev          # http://localhost:5173 (examples/basic demo)
 
 ```csv
 district,building,item,activity
-Product,Mobile approval,Went responsive instead of a native app,0.9
-Product,Large upload,Split files into 5MB chunks,0.2
+Kitchen,Sourdough,Feed the starter the night before,0.9
+Garden,Tomatoes,Plant after the last frost,0.2
 ```
 
 ## Library API
@@ -90,14 +80,14 @@ city.start();
 
 city.setData(
   ingestText(`
-# Product
-## Mobile approval
-- Went responsive instead of a native app
-- App review blocks same-day fixes
+# Kitchen
+## Sourdough
+- Feed the starter the night before
+- Bulk ferment until it doubles
 
-# Operations
-## Release window
-- Tuesday and Thursday afternoon only
+# Garden
+## Tomatoes
+- Plant after the last frost
 `),
 );
 
@@ -110,10 +100,10 @@ city.on('select', (building) => {
 
 ```ts
 city.setData({
-  districts: [{ id: 'ops', label: 'Operations', gaps: ['Runbooks'] }],
-  buildings: [{ id: 'release', name: 'Release window', districtId: 'ops', count: 12 }],
-  items: [{ id: '1', title: 'Tuesday only', buildingId: 'release', activity: 0.9 }],
-  links: [{ a: 'release', b: 'oncall' }],
+  districts: [{ id: 'garden', label: 'Garden', gaps: ['Compost'] }],
+  buildings: [{ id: 'tomatoes', name: 'Tomatoes', districtId: 'garden', count: 12 }],
+  items: [{ id: '1', title: 'Water at the base', buildingId: 'tomatoes', activity: 0.9 }],
+  links: [{ a: 'tomatoes', b: 'herbs' }],
 });
 ```
 

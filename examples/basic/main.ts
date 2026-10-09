@@ -2,33 +2,33 @@ import '../../src/style.css';
 import { createCityRenderer, ingestFiles, ingestText } from '../../src/index';
 import type { CityItem, IngestResult } from '../../src/index';
 
-const SAMPLE = `# Product
-## Mobile approval
-- Went responsive instead of a native app
-- App review blocks same-day fixes
-- Approval has only three screens
-## Large upload
-- Split files into 5MB chunks
-- Retry three times, then resume
-- Checksum per chunk
+const SAMPLE = `# Kitchen
+## Sourdough
+- Feed the starter the night before
+- Bulk ferment until it doubles
+- Bake covered for twenty minutes
+## Weeknight pasta
+- Salt the water like the sea
+- Save a cup of pasta water
+- Finish the sauce in the pan
 
-# Operations
-## Release window
-- Tuesday and Thursday afternoon only
-- Friday releases have nobody to watch them
-- Severity one defects delay the date
-## Night incident
-- On-call gets the first alert
-- Notify team channel, then service owner
-- Share status if it passes thirty minutes
+# Garden
+## Tomatoes
+- Plant after the last frost
+- Water at the base, not the leaves
+- Pinch the side shoots weekly
+## Herbs
+- Basil wants full sun
+- Cut the mint back in summer
+- Keep rosemary on the dry side
 
-# Team
-## First week
-- Day one accounts and permissions
-- Day two local environment
-- Day three read team docs
-- Day four first pull request
-- Day five watch a release
+# Reading
+## This year
+- Two novels a month
+- One history book each season
+- Finish one before starting the next
+- Write three lines after each book
+- Return library books on time
 `;
 
 const app = document.getElementById('app') as HTMLElement;

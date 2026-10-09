@@ -2,6 +2,13 @@
 
 # voxel-skyline
 
+<p>
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/three.js-000000?style=flat-square&logo=threedotjs&logoColor=white" alt="three.js"/>
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite"/>
+  <img src="https://img.shields.io/badge/MIT%20License-3DA639?style=flat-square&logo=opensourceinitiative&logoColor=white" alt="MIT License"/>
+</p>
+
 **글을 붙여 넣으면 도시가 됩니다.** `#` 제목은 구역, `##` 제목은 건물, 그 아래 줄은 항목이 됩니다. 건물은 항목이 많을수록 높아지고, 창은 활성도만큼 불이 켜지며, 아직 쓰지 않은 자리는 빈 필지로 남습니다. 아는 것의 모양과 비어 있는 곳이 눈에 보입니다. three.js 기반이며 모든 처리는 브라우저 안에서 끝납니다.
 
 ![글로 만든 도시](docs/screenshot.png)

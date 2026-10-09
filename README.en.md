@@ -2,6 +2,13 @@
 
 # voxel-skyline
 
+<p>
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/three.js-000000?style=flat-square&logo=threedotjs&logoColor=white" alt="three.js"/>
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite"/>
+  <img src="https://img.shields.io/badge/MIT%20License-3DA639?style=flat-square&logo=opensourceinitiative&logoColor=white" alt="MIT License"/>
+</p>
+
 **Paste your notes. Get a city you can walk around.** `#` headings become districts, `##` headings become buildings, and the lines under them become items. A building is as tall as it has items, its windows light up with activity, and anything you have not written yet stays an empty plot. The shape of what you know, and the holes in it, become something you can look at. Built on three.js. Everything runs in the browser.
 
 ![A city built from notes](docs/screenshot.png)

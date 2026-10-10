@@ -13,6 +13,14 @@
     "knowledge-base",
     "graph"
   ],
+  "homepage": "https://github.com/junghun133/voxel-skyline#readme",
+  "bugs": {
+    "url": "https://github.com/junghun133/voxel-skyline/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/junghun133/voxel-skyline.git"
+  },
   "license": "MIT",
   "author": "Junghun Park",
   "type": "module",
